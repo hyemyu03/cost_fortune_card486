@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>오늘의 재산운</title>
+  <meta name="description" content="하루 한 번, 절약과 재테크에 도움되는 짧은 재산운 메시지 ✨" />
+  <meta name="theme-color" content="#ffcc33" />
+  <meta property="og:image" content="/assets/og-image.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/assets/icon-192.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="/assets/icon-192.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;background:#f6f6f6;font-family:"Noto Sans KR",sans-serif;}
+    body{display:flex;flex-direction:column;align-items:center;justify-content:center;}
+
+    .card-box{
+      position:relative;
+      width:min(400px,90vw);
+      aspect-ratio:0.56;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 6px 18px rgba(0,0,0,0.18);
+      background:#fff;
+    }
+    .card-box iframe{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:none;
+    }
+
+    /* 🔮 운세 텍스트: 카드 위쪽 여백에 오버레이 */
+    .fortune-text{
+      position:absolute;
+      top:8%;
+      left:50%;
+      transform:translateX(-50%);
+      width:85%;
+      text-align:center;
+      font-weight:700;
+      color:#5b2a00;
+      font-size:clamp(14px,3.4vw,18px);
+      line-height:1.4;
+      text-shadow:0 1px 0 rgba(255,255,255,0.6);
+      background:rgba(255,255,255,0.35);
+      border-radius:8px;
+      padding:4px 6px;
+      transition:opacity .4s ease;
+    }
+
+    .controls{
+      margin-top:16px;
+      text-align:center;
+    }
+    .btn{
+      background:#ffcc33;
+      border:none;
+      border-radius:999px;
+      padding:10px 22px;
+      font-size:15px;
+      font-weight:700;
+      cursor:pointer;
+      transition:background .2s, transform .08s;
+    }
+    .btn:hover{background:#ffb703}
+    .btn:active{transform:scale(.97)}
+  </style>
+</head>
+
+<body>
+  <div class="card-box">
+    <iframe loading="lazy" src="https://www.miricanvas.com/v2/design2/v/294495bf-e232-4e77-8092-890e8138c78a?mode=embed"></iframe>
+    <div class="fortune-text" id="fortuneText"></div>
+  </div>
+
+  <div class="controls">
+    <button class="btn" onclick="newFortune()">🔁 다시 뽑기</button>
+  </div>
+
+  <script>
+    const fortunes = [
+      "오늘은 절약이 재산이 되는 날이에요! ☕ 작지만 현명한 선택이 통장을 미소 짓게 해요.",
+      "오늘은 통장에 여유가 생기는 날이에요 💸 불필요한 소비를 한 번만 줄여보세요.",
+      "오늘은 지출보다 마음의 안정이 큰 자산이 되는 날이에요 💛",
+      "오늘은 ‘한 잔 아껴서 내일의 투자’를 만드는 날이에요 📈",
+      "오늘은 당신의 선택이 통장에 행운을 더해요 🍀"
+    ];
+
+    function newFortune(){
+      const t = document.getElementById("fortuneText");
+      t.style.opacity = 0;
+      setTimeout(()=>{
+        t.textContent = fortunes[Math.floor(Math.random()*fortunes.length)];
+        t.style.opacity = 1;
+      },220);
+    }
+    newFortune();
+
+    // PWA 등록
+    if('serviceWorker' in navigator){
+      window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js'));
+    }
+  </script>
+</body>
+</html>
