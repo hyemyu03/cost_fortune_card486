@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>오늘의 재산운</title>
+  <meta name="theme-color" content="#f3b323" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;}
+    html{
+      background:url('제목_없는_아트워크.png') center/cover no-repeat fixed;
+    }
+    body{
+      background:url('제목_없는_아트워크.png') center/cover no-repeat fixed;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      min-height:100vh;
+      font-family:"Noto Sans KR",sans-serif;
+    }
+
+    .card-box{
+      position:relative;
+      width:min(400px,90vw);
+      aspect-ratio:0.56;
+      border-radius:12px;
+      overflow:hidden;
+      background:#fff;
+      box-shadow:none;
+    }
+    .card-box iframe{
+      position:absolute;inset:0;width:100%;height:100%;border:none;background:transparent;
+    }
+
+    .fortune-text{
+      position:absolute;
+      top:calc(15% - 0.7cm);
+      left:50%;transform:translateX(-50%);
+      width:72%;
+      text-align:center;
+      font-weight:700;color:#5b2a00;
+      font-size:clamp(14px,3.4vw,18px);line-height:1.4;
+      text-shadow:0 1px 0 rgba(255,255,255,.6);
+      background:rgba(255,255,255,.35);
+      border-radius:10px;padding:8px 10px;
+      transition:opacity .35s ease;
+      backdrop-filter: blur(2px);-webkit-backdrop-filter: blur(2px);
+    }
+
+    .controls{margin-top:16px;text-align:center}
+    .btn{background:#ffcc33;border:none;border-radius:999px;padding:10px 22px;
+         font-size:15px;font-weight:700;cursor:pointer;transition:.2s background,.08s transform}
+    .btn:hover{background:#ffb703}
+    .btn:active{transform:scale(.97)}
+  </style>
+</head>
+<body>
+  <div class="card-box">
+    <iframe loading="lazy" src="https://www.miricanvas.com/v2/design2/v/294495bf-e232-4e77-8092-890e8138c78a?mode=embed"></iframe>
+    <div class="fortune-text" id="fortuneText"></div>
+  </div>
+
+  <div class="controls">
+    <button class="btn" onclick="newFortune()">🔁 다시 뽑기</button>
+  </div>
+
+  <script>
+    const fortunes = [
+      "오늘은 절약이 재산이 되는 날이에요! ☕ 작지만 현명한 선택이 통장을 미소 짓게 해요.",
+      "오늘은 통장에 여유가 생기는 날이에요 💸 불필요한 소비를 한 번만 줄여보세요.",
+      "오늘은 지출보다 마음의 안정이 큰 자산이 되는 날이에요 💛",
+      "오늘은 ‘한 잔 아껴서 내일의 투자’를 만드는 날이에요 📈",
+      "오늘은 당신의 선택이 통장에 행운을 더해요 🍀"
+    ];
+    function newFortune(){
+      const t = document.getElementById("fortuneText");
+      t.style.opacity = 0;
+      setTimeout(()=>{
+        t.textContent = fortunes[Math.floor(Math.random()*fortunes.length)];
+        t.style.opacity = 1;
+      },220);
+    }
+    newFortune();
+  </script>
+</body>
+</html>
